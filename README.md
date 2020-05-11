@@ -1,2 +1,2 @@
 [![Build Status](https://travis-ci.com/AlexanderTheGrape/SOFTENG754-Group1-Assignment4.svg?token=jdneeXHk7zBz2GJAsBqg&branch=master)](https://travis-ci.com/AlexanderTheGrape/SOFTENG754-Group1-Assignment4)
-
+[![codecov](https://codecov.io/gh/AlexanderTheGrape/SOFTENG754-Group1-Assignment4/branch/master/graph/badge.svg?token=3G7FOSD8ZI)](https://codecov.io/gh/AlexanderTheGrape/SOFTENG754-Group1-Assignment4)
