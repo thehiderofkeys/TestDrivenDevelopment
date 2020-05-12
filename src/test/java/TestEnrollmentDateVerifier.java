@@ -15,7 +15,7 @@ public class TestEnrollmentDateVerifier{
     }
 
     @Test
-    public void Should_ReturnEnrollmentOpen_When_AfterEnrollmentDate(){
+    public void Should_ReturnEnrollmentOpen_When_DuringEnrollmentDates(){
         Course desiredCourse =  Mockito.mock(Course.class);
         Mockito.when(desiredCourse.getOpeningDate()).thenReturn(LocalDateTime.parse("2014-03-28T16:00:49.455"));
         Mockito.when(desiredCourse.getClosingDate()).thenReturn(LocalDateTime.parse("2014-05-28T16:00:49.455"));
@@ -23,7 +23,7 @@ public class TestEnrollmentDateVerifier{
     }
 
     @Test
-    public void Should_ReturnEnrollmentClosed_When_BeforeEnrollmentDate(){
+    public void Should_ReturnEnrollmentClosed_When_BeforeEnrollmentOpens(){
         Course desiredCourse =  Mockito.mock(Course.class);
         Mockito.when(desiredCourse.getOpeningDate()).thenReturn(LocalDateTime.parse("2014-03-28T16:00:49.455"));
         Mockito.when(desiredCourse.getClosingDate()).thenReturn(LocalDateTime.parse("2014-05-28T16:00:49.455"));
