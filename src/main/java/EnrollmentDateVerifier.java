@@ -5,6 +5,9 @@ public class EnrollmentDateVerifier {
         if (currentDateTime.isBefore(course.getOpeningDate())){
             return false;
         }
+        if (currentDateTime.isAfter(course.getClosingDate())){
+            return false;
+        }
         return true;
     }
 }
