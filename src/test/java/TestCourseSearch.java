@@ -62,4 +62,19 @@ public class TestCourseSearch {
         assertTrue(results.contains(mockedCourse1));
         assertTrue(results.contains(mockedCourse2));
     }
+
+    @Test
+    public void Should_ReturnEmpty_When_NonexistingCode(){
+        Course mockedCourse = Mockito.mock(Course.class);
+        Course mockedCourse1 = Mockito.mock(Course.class);
+        Course mockedCourse2 = Mockito.mock(Course.class);
+        Mockito.when(mockedCourse.getCourseName()).thenReturn("SOFTENG 701");
+        Mockito.when(mockedCourse1.getCourseName()).thenReturn("SOFTENG 754");
+        Mockito.when(mockedCourse2.getCourseName()).thenReturn("SOFTENG 750");
+        courseCatalog.add(mockedCourse);
+        courseCatalog.add(mockedCourse1);
+        courseCatalog.add(mockedCourse2);
+        ArrayList<Course> results = courseCatalog.search("COMPSYS 741");
+        assertEquals(0, results.size());
+    }
 }
