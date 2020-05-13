@@ -23,7 +23,7 @@ public class TestCourseSearch {
         Course mockedCourse2 = Mockito.mock(Course.class);
         courseCatalog.add(mockedCourse);
         courseCatalog.add(mockedCourse2);
-        assertEquals(courseCatalog.getAllCourses().size(), 2);
+        assertEquals(2, courseCatalog.getAllCourses().size());
     }
 
     @Test
@@ -38,7 +38,28 @@ public class TestCourseSearch {
         courseCatalog.add(mockedCourse1);
         courseCatalog.add(mockedCourse2);
         ArrayList<Course> results = courseCatalog.search("SOFTENG 701");
-        assertEquals(results.size(), 1);
-        assertTrue(results.get(0).getCourseName().equals("SOFTENG 701"));
+        assertEquals(1, results.size());
+        assertTrue(results.contains(mockedCourse));
+    }
+
+    @Test
+    public void Should_ReturnMultipleCourses_When_PartialCourseNameSearched(){
+        Course mockedCourse = Mockito.mock(Course.class);
+        Course mockedCourse1 = Mockito.mock(Course.class);
+        Course mockedCourse2 = Mockito.mock(Course.class);
+        Course mockedCourse3 = Mockito.mock(Course.class);
+        Mockito.when(mockedCourse.getCourseName()).thenReturn("SOFTENG 701");
+        Mockito.when(mockedCourse1.getCourseName()).thenReturn("SOFTENG 754");
+        Mockito.when(mockedCourse2.getCourseName()).thenReturn("SOFTENG 750");
+        Mockito.when(mockedCourse3.getCourseName()).thenReturn("COMPSYS 201");
+        courseCatalog.add(mockedCourse);
+        courseCatalog.add(mockedCourse1);
+        courseCatalog.add(mockedCourse2);
+        courseCatalog.add(mockedCourse3);
+        ArrayList<Course> results = courseCatalog.search("SOFTENG");
+        assertEquals(3, results.size());
+        assertTrue(results.contains(mockedCourse));
+        assertTrue(results.contains(mockedCourse1));
+        assertTrue(results.contains(mockedCourse2));
     }
 }
