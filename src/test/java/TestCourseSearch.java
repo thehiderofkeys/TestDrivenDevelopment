@@ -10,7 +10,7 @@ public class TestCourseSearch {
 
     @Before
     public void setUp(){
-        courseCatalog = new CoursesCatalog();
+        courseCatalog = new CourseCatalog();
     }
 
     @Test
@@ -19,6 +19,6 @@ public class TestCourseSearch {
         Course mockedCourse2 = Mockito.mock(Course.class);
         courseCatalog.add(mockedCourse);
         courseCatalog.add(mockedCourse2);
-        assertEquals(courseCatalog.getAllCourses().length, 2);
+        assertEquals(courseCatalog.getAllCourses().size(), 2);
     }
 }
