@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 
 public class CourseCatalog {
-    public void add(Course course){
 
+    private ArrayList<Course> courseCatalog = new ArrayList<>();
+
+    public void add(Course course){
+        courseCatalog.add(course);
     }
     public ArrayList getAllCourses(){
-        return null;
+        return courseCatalog;
     }
 }
