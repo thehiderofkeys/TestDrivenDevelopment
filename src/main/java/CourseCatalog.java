@@ -7,7 +7,10 @@ public class CourseCatalog {
     public void add(Course course){
         courseCatalog.add(course);
     }
-    public ArrayList getAllCourses(){
+    public ArrayList<Course> getAllCourses(){
         return courseCatalog;
+    }
+    public ArrayList<Course> search(String userSearch){
+        return null;
     }
 }

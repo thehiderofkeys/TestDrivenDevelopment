@@ -10,4 +10,8 @@ public class Course {
     public LocalDateTime getClosingDate(){
         return null;
     }
+    @CoverageIgnore
+    public String getCourseName(){
+        return null;
+    }
 }
