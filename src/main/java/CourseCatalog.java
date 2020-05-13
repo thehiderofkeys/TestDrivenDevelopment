@@ -14,7 +14,7 @@ public class CourseCatalog {
     public ArrayList<Course> search(String userSearch){
         searchResults.clear();
         for (Course course : courseCatalog){
-            if (course.getCourseName().equals(userSearch)){
+            if (course.getCourseName().contains(userSearch)){
                 searchResults.add(course);
             }
         }
