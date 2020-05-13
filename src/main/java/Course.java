@@ -2,16 +2,22 @@ import java.time.LocalDateTime;
 
 @CoverageIgnore
 public class Course {
+
+    private LocalDateTime openingDate;
+    private LocalDateTime closingDate;
+    private String courseName;
+
+
     @CoverageIgnore
     public LocalDateTime getOpeningDate(){
-        return null;
+        return this.openingDate;
     }
     @CoverageIgnore
     public LocalDateTime getClosingDate(){
-        return null;
+        return this.closingDate;
     }
     @CoverageIgnore
     public String getCourseName(){
-        return null;
+        return this.courseName;
     }
 }
