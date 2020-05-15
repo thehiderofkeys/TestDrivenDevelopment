@@ -47,4 +47,18 @@ public class TestClashVerifier {
         ArrayList<Course> clashList = verifier.checkClash(courseList);
         assertTrue(clashList.isEmpty());
     }
+
+    @Test
+    public void Should_ReturnClashingCourseNames_When_CourseTimesOverlap(){
+        ArrayList<Course> courseList = new ArrayList<>();
+        courseList.add(courseDatabase.get("SOFTENG 701"));
+        courseList.add(courseDatabase.get("SOFTENG 702"));
+        ArrayList<Course> clashList = verifier.checkClash(courseList);
+
+        ArrayList<Course> expectedList = new ArrayList<>();
+        expectedList.add(courseDatabase.get("SOFTENG 701"));
+        expectedList.add(courseDatabase.get("SOFTENG 702"));
+
+        assertEquals(expectedList, clashList);
+    }
 }
