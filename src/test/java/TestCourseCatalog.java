@@ -1,6 +1,5 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -8,22 +7,22 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class TestCourseSearch {
+public class TestCourseCatalog {
 
-    private CourseCatalog courseCatalog;
+    private CourseCatalog database;
 
     @Before
     public void setUp(){
-        courseCatalog = new CourseCatalog();
+        database = new CourseCatalog();
     }
 
     @Test
     public void Should_ReturnListOfCourses_When_CoursesRequested(){
         Course mockedCourse = Mockito.mock(Course.class);
         Course mockedCourse2 = Mockito.mock(Course.class);
-        courseCatalog.add(mockedCourse);
-        courseCatalog.add(mockedCourse2);
-        assertEquals(2, courseCatalog.getAllCourses().size());
+        database.add(mockedCourse);
+        database.add(mockedCourse2);
+        assertEquals(2, database.getAllCourses().size());
     }
 
     @Test
@@ -34,10 +33,10 @@ public class TestCourseSearch {
         Mockito.when(mockedCourse.getCourseName()).thenReturn("SOFTENG 701");
         Mockito.when(mockedCourse1.getCourseName()).thenReturn("SOFTENG 754");
         Mockito.when(mockedCourse2.getCourseName()).thenReturn("SOFTENG 750");
-        courseCatalog.add(mockedCourse);
-        courseCatalog.add(mockedCourse1);
-        courseCatalog.add(mockedCourse2);
-        ArrayList<Course> results = courseCatalog.search("SOFTENG 701");
+        database.add(mockedCourse);
+        database.add(mockedCourse1);
+        database.add(mockedCourse2);
+        ArrayList<Course> results = database.search("SOFTENG 701");
         assertEquals(1, results.size());
         assertTrue(results.contains(mockedCourse));
     }
@@ -52,11 +51,11 @@ public class TestCourseSearch {
         Mockito.when(mockedCourse1.getCourseName()).thenReturn("SOFTENG 754");
         Mockito.when(mockedCourse2.getCourseName()).thenReturn("SOFTENG 750");
         Mockito.when(mockedCourse3.getCourseName()).thenReturn("COMPSYS 201");
-        courseCatalog.add(mockedCourse);
-        courseCatalog.add(mockedCourse1);
-        courseCatalog.add(mockedCourse2);
-        courseCatalog.add(mockedCourse3);
-        ArrayList<Course> results = courseCatalog.search("SOFTENG");
+        database.add(mockedCourse);
+        database.add(mockedCourse1);
+        database.add(mockedCourse2);
+        database.add(mockedCourse3);
+        ArrayList<Course> results = database.search("SOFTENG");
         assertEquals(3, results.size());
         assertTrue(results.contains(mockedCourse));
         assertTrue(results.contains(mockedCourse1));
@@ -71,10 +70,10 @@ public class TestCourseSearch {
         Mockito.when(mockedCourse.getCourseName()).thenReturn("SOFTENG 701");
         Mockito.when(mockedCourse1.getCourseName()).thenReturn("SOFTENG 754");
         Mockito.when(mockedCourse2.getCourseName()).thenReturn("SOFTENG 750");
-        courseCatalog.add(mockedCourse);
-        courseCatalog.add(mockedCourse1);
-        courseCatalog.add(mockedCourse2);
-        ArrayList<Course> results = courseCatalog.search("COMPSYS 741");
+        database.add(mockedCourse);
+        database.add(mockedCourse1);
+        database.add(mockedCourse2);
+        ArrayList<Course> results = database.search("COMPSYS 741");
         assertEquals(0, results.size());
     }
 
@@ -86,10 +85,10 @@ public class TestCourseSearch {
         Mockito.when(mockedCourse.getCourseName()).thenReturn("SOFTENG 701");
         Mockito.when(mockedCourse1.getCourseName()).thenReturn("SOFTENG 754");
         Mockito.when(mockedCourse2.getCourseName()).thenReturn("SOFTENG 750");
-        courseCatalog.add(mockedCourse);
-        courseCatalog.add(mockedCourse1);
-        courseCatalog.add(mockedCourse2);
-        ArrayList<Course> results = courseCatalog.search("");
+        database.add(mockedCourse);
+        database.add(mockedCourse1);
+        database.add(mockedCourse2);
+        ArrayList<Course> results = database.search("");
         assertEquals(0, results.size());
     }
 }
