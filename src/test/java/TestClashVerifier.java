@@ -22,9 +22,9 @@ public class TestClashVerifier {
         verifier = new ClashVerifier();
         courseDatabase = new HashMap<>();
 
-        TimetableEvent[] lecture1 = {new TimetableEvent(LocalDateTime.parse("2014-03-28T16:00:00.000"), 2)};
-        TimetableEvent[] lecture2 = {new TimetableEvent(LocalDateTime.parse("2014-03-28T16:00:00.000"), 2)};
-        TimetableEvent[] lecture3 = {new TimetableEvent(LocalDateTime.parse("2014-03-28T20:00:00.000"), 2)};
+        TimetableEvent[] lecture1 = {new TimetableEvent(LocalDateTime.parse("2014-03-28T16:00:00.000"), 2, TimetableEvent.EventType.Lecture)};
+        TimetableEvent[] lecture2 = {new TimetableEvent(LocalDateTime.parse("2014-03-28T16:00:00.000"), 2, TimetableEvent.EventType.Lecture)};
+        TimetableEvent[] lecture3 = {new TimetableEvent(LocalDateTime.parse("2014-03-28T20:00:00.000"), 2, TimetableEvent.EventType.Lecture)};
 
         Course course1 = Mockito.mock(Course.class);
         Course course2 = Mockito.mock(Course.class);
