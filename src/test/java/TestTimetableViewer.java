@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.sql.Time;
@@ -9,11 +10,11 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class TestTimetableViewer{
-    private EnrollmentDateVerifier verifier;
+    private TimetableViewer timetableViewer;
 
     @Before
     public void setUp() {
-
+        timetableViewer = new TimetableViewer();
     }
 
     @Test
@@ -25,26 +26,38 @@ public class TestTimetableViewer{
         Course mockedCourse2 = Mockito.mock(Course.class);
         Course mockedCourse3 = Mockito.mock(Course.class);
 
-//        TimetableEvent lecture1 = new TimetableEvent(LocalDateTime.parse("2014-03-28T16:00:00.000"));
-//        TimetableEvent lecture2 = new TimetableEvent(LocalDateTime.parse("2014-03-28T16:00:00.000"));
-//        TimetableEvent lecture3 = new TimetableEvent(LocalDateTime.parse("2014-03-28T20:00:00.000"));
-
         givenCourseList.add(mockedCourse1);
         givenCourseList.add(mockedCourse2);
         givenCourseList.add(mockedCourse3);
 
-        List<TimetableEvent> timetableEventList = new ArrayList<>();
+        TimetableEvent lecture1 = Mockito.mock(TimetableEvent.class);
+        TimetableEvent lecture2 = Mockito.mock(TimetableEvent.class);
+        TimetableEvent lecture3 = Mockito.mock(TimetableEvent.class);
 
+        ArrayList<TimetableEvent> courseSchedule1 = new ArrayList<>();
+        courseSchedule1.add(lecture1);
+        courseSchedule1.add(lecture2);
+        ArrayList<TimetableEvent> courseSchedule2 = new ArrayList<>();
+        courseSchedule2.add(lecture1);
+        courseSchedule2.add(lecture3);
+        ArrayList<TimetableEvent> courseSchedule3 = new ArrayList<>();
+        courseSchedule3.add(lecture2);
+        courseSchedule3.add(lecture3);
 
-//        List<TimetableEvent> timetableEventList = new ArrayList<TimetableEvent>();
-//        timetableEventList.add(lecture1);
-//        timetableEventList.add(lecture2);
-//        timetableEventList.add(lecture3);
-        // should return a timetable event data list
-        assertEquals((timetableEventList).size(), 3);
-        assertTrue(timetableEventList.contains(mockedCourse1));
-        assertTrue(timetableEventList.contains(mockedCourse2));
-        assertTrue(timetableEventList.contains(mockedCourse3));
+        Mockito.when(mockedCourse1.getCourseSchedule())
+                .thenReturn(courseSchedule1);
+        Mockito.when(mockedCourse2.getCourseSchedule())
+                .thenReturn(courseSchedule2);
+        Mockito.when(mockedCourse3.getCourseSchedule())
+                .thenReturn(courseSchedule3);
+
+        List<TimetableEvent> combinedTimetableEventList = timetableViewer.getAllTimetableEvents(givenCourseList);
+
+        assertEquals((combinedTimetableEventList).size(), 6);
+        assertTrue(combinedTimetableEventList.contains(lecture1));
+        assertTrue(combinedTimetableEventList.contains(lecture2));
+        assertTrue(combinedTimetableEventList.contains(lecture3));
+
     }
 }
 
