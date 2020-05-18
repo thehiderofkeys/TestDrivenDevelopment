@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 public class EnrollmentDatabase {
     private HashMap<String,ArrayList<Course>> database = new HashMap<>();
+    private HashMap<String,ArrayList<Concession>> concessionDatabase = new HashMap<>();
 
     public void addEnrollment(String username, ArrayList<Course> enrollmentList){
         if (!database.containsKey(username)){
@@ -15,8 +16,9 @@ public class EnrollmentDatabase {
         return database.get(username);
     }
     public void addConcessions(String username, ArrayList<Concession> concessionList){
+        concessionDatabase.put(username,concessionList);
     }
     public ArrayList<Concession> getConcessions(String username){
-        return null;
+        return concessionDatabase.get(username);
     }
 }
