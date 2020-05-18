@@ -29,4 +29,21 @@ public class TestEnrollmentDatabase {
         assertEquals(3, result.size());
         assertTrue(result.contains(course1) & result.contains(course2) & result.contains(course3));
     }
+    @Test
+    public void Should_PersistEnrollment_When_MultipleEnrollmentRequested(){
+        ArrayList<Course> desiredCourses1 = new ArrayList<>();
+        ArrayList<Course> desiredCourses2 = new ArrayList<>();
+        Course course1 = Mockito.mock(Course.class);
+        desiredCourses1.add(course1);
+        Course course2 = Mockito.mock(Course.class);
+        desiredCourses2.add(course2);
+        Course course3 = Mockito.mock(Course.class);
+        desiredCourses2.add(course3);
+        enrollmentDatabase.addEnrollment("usr123",desiredCourses1);
+        enrollmentDatabase.addEnrollment("usr123",desiredCourses2);
+        ArrayList<Course> result = enrollmentDatabase.getEnrolledCourses("usr123");
+        assertNotEquals(null,result);
+        assertEquals(3, result.size());
+        assertTrue(result.contains(course1) & result.contains(course2) & result.contains(course3));
+    }
 }
