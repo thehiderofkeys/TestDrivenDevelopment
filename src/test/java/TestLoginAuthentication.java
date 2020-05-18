@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TestLoginAuthentication {
@@ -19,7 +20,13 @@ public class TestLoginAuthentication {
 
     @Test
     public void should_ReturnTrue_When_CredentialsCorrect(){
-        boolean isLoggedIn = loginAuthenticator.login("username", "password");
+        boolean isLoggedIn = loginAuthenticator.login("snea123", "password1");
         assertTrue(isLoggedIn);
+    }
+
+    @Test
+    public void should_ReturnFalse_When_CredentialsIncorrect(){
+        boolean isLoggedIn = loginAuthenticator.login("rlim456", "password2");
+        assertFalse(isLoggedIn);
     }
 }
