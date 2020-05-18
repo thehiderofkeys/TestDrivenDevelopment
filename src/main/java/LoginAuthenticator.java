@@ -8,6 +8,13 @@ public class LoginAuthenticator {
     }
 
     public boolean login(String userName, String password){
-        return true;
+        boolean isLoggedIn = false;
+
+        String userPassword = passwordDatabase.get(userName);
+        if (userPassword == password) {
+            isLoggedIn = true;
+        }
+
+        return isLoggedIn;
     }
 }
