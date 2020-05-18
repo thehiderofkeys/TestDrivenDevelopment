@@ -16,7 +16,11 @@ public class EnrollmentDatabase {
         return database.get(username);
     }
     public void addConcessions(String username, ArrayList<Concession> concessionList){
-        concessionDatabase.put(username,concessionList);
+        if (!concessionDatabase.containsKey(username)){
+            concessionDatabase.put(username, new ArrayList<>());
+        }
+        ArrayList<Concession> list = concessionDatabase.get(username);
+        list.addAll(concessionList);
     }
     public ArrayList<Concession> getConcessions(String username){
         return concessionDatabase.get(username);
