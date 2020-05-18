@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @CoverageIgnore
 public class Course {
@@ -6,6 +7,7 @@ public class Course {
     private LocalDateTime openingDate;
     private LocalDateTime closingDate;
     private String courseName;
+    private ArrayList<TimetableEvent> courseSchedule;
 
 
     @CoverageIgnore
@@ -19,5 +21,9 @@ public class Course {
     @CoverageIgnore
     public String getCourseName(){
         return this.courseName;
+    }
+    @CoverageIgnore
+    public ArrayList<TimetableEvent> getCourseSchedule(){
+        return courseSchedule;
     }
 }
