@@ -46,4 +46,19 @@ public class TestEnrollmentDatabase {
         assertEquals(3, result.size());
         assertTrue(result.contains(course1) & result.contains(course2) & result.contains(course3));
     }
+    @Test
+    public void Should_PersistConcessions_When_ConcessionRequested(){
+        ArrayList<Concession> concessions = new ArrayList<>();
+        Concession concession1 = Mockito.mock(Concession.class);
+        concessions.add(concession1);
+        Concession concession2 = Mockito.mock(Concession.class);
+        concessions.add(concession2);
+        Concession concession3 = Mockito.mock(Concession.class);
+        concessions.add(concession3);
+        enrollmentDatabase.addConcessions("usr123",concessions);
+        ArrayList<Concession> result = enrollmentDatabase.getConcessions("usr123");
+        assertNotEquals(null,result);
+        assertEquals(3, result.size());
+        assertTrue(result.contains(concession1) & result.contains(concession2) & result.contains(concession3));
+    }
 }
