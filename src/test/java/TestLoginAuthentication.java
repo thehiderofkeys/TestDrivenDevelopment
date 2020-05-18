@@ -26,7 +26,7 @@ public class TestLoginAuthentication {
 
     @Test
     public void should_ReturnFalse_When_CredentialsIncorrect(){
-        boolean isLoggedIn = loginAuthenticator.login("rlim456", "password2");
+        boolean isLoggedIn = loginAuthenticator.login("rlim456", "password4");
         assertFalse(isLoggedIn);
     }
 }
