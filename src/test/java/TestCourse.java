@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -20,9 +21,9 @@ public class TestCourse {
     @Test
     public void should_ReturnCourseDetails_when_CourseInfoRequested(){
         ArrayList<TimetableEvent> courseSchedule = new ArrayList<TimetableEvent>();
-        TimetableEvent lec = new TimetableEvent(LocalDateTime.parse("2014-04-28T16:00:00.00"), 1, EventType.Lecture);
-        TimetableEvent tut = new TimetableEvent(LocalDateTime.parse("2014-04-29T16:00:00.00"), 1, EventType.Tutorial);
-        TimetableEvent lab = new TimetableEvent(LocalDateTime.parse("2014-04-40T16:00:00.00"), 1, EventType.Lab);
+        TimetableEvent lec = new TimetableEvent(LocalDateTime.parse("2014-04-28T16:00:00.00"), 1, TimetableEvent.EventType.Lecture);
+        TimetableEvent tut = new TimetableEvent(LocalDateTime.parse("2014-04-29T16:00:00.00"), 1, TimetableEvent.EventType.Tutorial);
+        TimetableEvent lab = new TimetableEvent(LocalDateTime.parse("2014-04-30T16:00:00.00"), 1, TimetableEvent.EventType.Lab);
 
         courseSchedule.add(lec);
         courseSchedule.add(tut);
@@ -30,8 +31,12 @@ public class TestCourse {
 
 
         ArrayList<Person> teachingStaff = new ArrayList<Person>();
-        Person p1 = new Person("Sam Neale", {CourseRole.Lecturer});
-        Person p2 = new Person("Ryan Lim", {CourseRole.Lecturer, CourseRole.CourseCoordinator});
+        Person.CourseRole[] roles1 =  {Person.CourseRole.Lecturer};
+        Person p1 = new Person("Sam Neale", new ArrayList<Person.CourseRole>(Arrays.<Person.CourseRole>asList(roles1)));
+
+        Person.CourseRole[] roles2 =  {Person.CourseRole.Lecturer};
+        Person p2 = new Person("Ryan Lim", new ArrayList<Person.CourseRole>(Arrays.<Person.CourseRole>asList(roles2)));
+
         teachingStaff.add(p1);
         teachingStaff.add(p2);
 
@@ -40,7 +45,7 @@ public class TestCourse {
         courseDatabase.put("SOFTENG 754" , c1);
 
         // "Fake" course request
-        Course returnedCourse = courseDatabase.get("SOFTENG 701");
+        Course returnedCourse = courseDatabase.get("SOFTENG 754");
 
         assertEquals(c1, returnedCourse);
     }

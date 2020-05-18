@@ -1,3 +1,5 @@
+
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -8,6 +10,13 @@ public class Course {
     private LocalDateTime closingDate;
     private String courseName;
     private ArrayList<TimetableEvent> courseSchedule;
+
+    public Course (String courseName, LocalDateTime openingDate, LocalDateTime closingDate,  ArrayList<TimetableEvent> courseSchedule){
+        this.openingDate = openingDate;
+        this.closingDate = closingDate;
+        this.courseName = courseName;
+        this.courseSchedule = courseSchedule;
+    }
 
 
     @CoverageIgnore
