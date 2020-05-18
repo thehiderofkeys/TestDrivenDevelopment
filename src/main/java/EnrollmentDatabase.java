@@ -14,4 +14,9 @@ public class EnrollmentDatabase {
     public ArrayList<Course> getEnrolledCourses(String username){
         return database.get(username);
     }
+    public void addConcessions(String username, ArrayList<Concession> concessionList){
+    }
+    public ArrayList<Concession> getConcessions(String username){
+        return null;
+    }
 }
