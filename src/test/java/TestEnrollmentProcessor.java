@@ -62,4 +62,15 @@ public class TestEnrollmentProcessor {
         assertEquals(EnrollmentProcessor.RequestResult.ENROLLED, result);
         Mockito.verify(mockDB).addEnrollment("usr123",courses);
     }
+
+    @Test
+    public void Should_ApplyConcession_When_ConcessionRequested(){
+        ArrayList<Concession> concessions = new ArrayList<>();
+        ConcessionRequest request = new ConcessionRequest("usr123",concessions);
+        enrollmentProcessor.requestConcession(request);
+        Mockito.when(mockCourse.reserveSeat()).thenReturn(true);
+        EnrollmentProcessor.RequestResult result = enrollmentProcessor.processNextRequest();
+        assertEquals(EnrollmentProcessor.RequestResult.CONCESSION_APPLIED, result);
+        Mockito.verify(mockDB).addConcessions("usr123",concessions);
+    }
 }
