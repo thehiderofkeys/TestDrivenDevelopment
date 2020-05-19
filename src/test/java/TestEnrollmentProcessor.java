@@ -18,10 +18,10 @@ public class TestEnrollmentProcessor {
         mockCourse = Mockito.mock(Course.class);
         enrollmentProcessor = new EnrollmentProcessor(mockDB);
     }
+
     @Test
     public void Should_QueueEnrollmentRequests_When_EnrollmentRequested(){
         ArrayList<Course> courses = new ArrayList<>();
-        courses.add(mockCourse);
         EnrollmentRequest request1 = new EnrollmentRequest("usr123",courses);
         EnrollmentRequest request2 = new EnrollmentRequest("usr123",courses);
         enrollmentProcessor.requestEnrollment(request1);
