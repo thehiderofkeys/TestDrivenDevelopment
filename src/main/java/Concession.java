@@ -1,5 +1,5 @@
 public class Concession {
-    public String getName() {
+    public String getUsername() {
         return null;
     }
 

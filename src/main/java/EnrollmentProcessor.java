@@ -41,11 +41,11 @@ public class EnrollmentProcessor {
     }
 
     public void approveConcession(Concession concession) {
-        String name = concession.getName();
+        String username = concession.getUsername();
         Course course = concession.getCourse();
         ArrayList<Course> enrollment = new ArrayList<>();
         enrollment.add(course);
-        database.addEnrollment(name,enrollment);
+        database.addEnrollment(username,enrollment);
     }
 
     public enum RequestResult {CONCESSION_APPLIED, ENROLLED}

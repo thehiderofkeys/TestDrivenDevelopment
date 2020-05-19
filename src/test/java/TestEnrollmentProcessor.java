@@ -77,7 +77,7 @@ public class TestEnrollmentProcessor {
     @Test
     public void Should_Enroll_When_ConcessionApproved(){
         Concession concession = Mockito.mock(Concession.class);
-        Mockito.when(concession.getName()).thenReturn("usr123");
+        Mockito.when(concession.getUsername()).thenReturn("usr123");
         Mockito.when(concession.getCourse()).thenReturn(mockCourse);
         enrollmentProcessor.approveConcession(concession);
         ArrayList<Course> courses = new ArrayList<>();
