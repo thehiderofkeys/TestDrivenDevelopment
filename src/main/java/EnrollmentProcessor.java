@@ -39,5 +39,8 @@ public class EnrollmentProcessor {
         return null;
     }
 
+    public void approveConcession(Concession concession) {
+    }
+
     public enum RequestResult {CONCESSION_APPLIED, ENROLLED}
 }
