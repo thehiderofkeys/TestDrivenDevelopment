@@ -48,5 +48,8 @@ public class EnrollmentProcessor {
         database.addEnrollment(username,enrollment);
     }
 
+    public void declineConcession(Concession concession) {
+    }
+
     public enum RequestResult {CONCESSION_APPLIED, ENROLLED}
 }

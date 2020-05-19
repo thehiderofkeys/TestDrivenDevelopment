@@ -39,4 +39,7 @@ public class Course {
     public boolean reserveSeat() {
         return false;
     }
+
+    public void releaseSeat() {
+    }
 }
