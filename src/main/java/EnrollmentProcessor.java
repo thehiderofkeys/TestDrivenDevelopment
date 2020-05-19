@@ -49,6 +49,9 @@ public class EnrollmentProcessor {
     }
 
     public void declineConcession(Concession concession) {
+        String username = concession.getUsername();
+        Course course = concession.getCourse();
+        course.releaseSeat();
     }
 
     public enum RequestResult {CONCESSION_APPLIED, ENROLLED}
