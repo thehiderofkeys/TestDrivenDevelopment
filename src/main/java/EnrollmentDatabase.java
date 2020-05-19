@@ -28,6 +28,20 @@ public class EnrollmentDatabase {
     }
 
     public ArrayList<Course> unenroll(String username, ArrayList<Course> courseToDrop){
-        return new ArrayList<Course>();
+        ArrayList<Course> currentEnrollments = getEnrolledCourses(username);
+        ArrayList<Course> coursesAfterUnenroll = (ArrayList<Course>) currentEnrollments.clone();
+
+        for (Course c : currentEnrollments){
+            for (Course drop : courseToDrop){
+                if (c.getCourseName().equals(drop.getCourseName())){
+                    coursesAfterUnenroll.remove(drop);
+                }
+            }
+        }
+
+        // Update the DB
+        enrolledCourseDatabase.put(username, coursesAfterUnenroll);
+
+        return coursesAfterUnenroll;
     }
 }
