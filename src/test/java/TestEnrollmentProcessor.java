@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -16,8 +18,10 @@ public class TestEnrollmentProcessor {
     }
     @Test
     public void Should_QueueEnrollmentRequests_When_EnrollmentRequested(){
-        EnrollmentRequest request1 = new EnrollmentRequest("usr123",mockCourse);
-        EnrollmentRequest request2 = new EnrollmentRequest("usr123",mockCourse);
+        ArrayList<Course> courses = new ArrayList<>();
+        courses.add(mockCourse);
+        EnrollmentRequest request1 = new EnrollmentRequest("usr123",courses);
+        EnrollmentRequest request2 = new EnrollmentRequest("usr123",courses);
         enrollmentProcessor.requestEnrollment(request1);
         enrollmentProcessor.requestEnrollment(request2);
         EnrollmentRequest result;
