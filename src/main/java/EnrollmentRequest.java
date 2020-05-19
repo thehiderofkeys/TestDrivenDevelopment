@@ -13,4 +13,14 @@ public class EnrollmentRequest implements RequestObject{
     public ArrayList<Course> getCourses(){
         return courses;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this)
+            return true;
+        if (!(o instanceof EnrollmentRequest))
+            return false;
+        EnrollmentRequest er = (EnrollmentRequest)o;
+        return username.equals(er.getUsername()) && courses.equals(er.courses);
+    }
 }

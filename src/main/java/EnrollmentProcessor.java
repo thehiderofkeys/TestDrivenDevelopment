@@ -28,9 +28,24 @@ public class EnrollmentProcessor {
     public RequestResult processNextRequest() {
         RequestObject request = getNextRequest();
         if(request instanceof EnrollmentRequest) {
+            RequestResult result = RequestResult.ENROLLED;
             EnrollmentRequest enrollmentRequest = (EnrollmentRequest)request;
-            database.addEnrollment(enrollmentRequest.getUsername(), enrollmentRequest.getCourses());
-            return RequestResult.ENROLLED;
+            ArrayList<Course> availCourses = new ArrayList<>();
+            for (Course course : enrollmentRequest.getCourses()){
+                if(course.reserveSeat()){
+                    availCourses.add(course);
+                }
+                else{
+                    ArrayList<Course> courseList = new ArrayList<>();
+                    courseList.add(course);
+                    EnrollmentRequest waitListedRequest = new EnrollmentRequest(
+                            enrollmentRequest.getUsername(),courseList);
+                    course.addToWaitList(waitListedRequest);
+                    result = RequestResult.WAITLISTED;
+                }
+            }
+            database.addEnrollment(enrollmentRequest.getUsername(), availCourses);
+            return result;
         }
         if(request instanceof ConcessionRequest) {
             ConcessionRequest enrollmentRequest = (ConcessionRequest)request;
