@@ -10,11 +10,13 @@ import static org.junit.Assert.assertNull;
 public class TestEnrollmentProcessor {
     private EnrollmentProcessor enrollmentProcessor;
     private Course mockCourse;
+    private EnrollmentDatabase mockDB;
 
     @Before
     public void setUp(){
+        mockDB = Mockito.mock(EnrollmentDatabase.class);
         mockCourse = Mockito.mock(Course.class);
-        enrollmentProcessor = new EnrollmentProcessor();
+        enrollmentProcessor = new EnrollmentProcessor(mockDB);
     }
     @Test
     public void Should_QueueEnrollmentRequests_When_EnrollmentRequested(){
@@ -33,4 +35,15 @@ public class TestEnrollmentProcessor {
         assertNull(result);
     }
 
+    @Test
+    public void Should_Enroll_When_EnrollmentRequested(){
+        ArrayList<Course> courses = new ArrayList<>();
+        courses.add(mockCourse);
+        EnrollmentRequest request = new EnrollmentRequest("usr123",courses);
+        enrollmentProcessor.requestEnrollment(request);
+        Mockito.when(mockCourse.reserveSeat()).thenReturn(true);
+        EnrollmentProcessor.RequestResult result = enrollmentProcessor.processNextRequest();
+        assertEquals(EnrollmentProcessor.RequestResult.ENROLLED, result);
+        Mockito.verify(mockDB).addEnrollment("usr123",courses);
+    }
 }
