@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,6 +25,7 @@ public class EnrollmentDatabase {
     public ArrayList<Concession> getConcessions(String username){
         return concessionDatabase.get(username);
     }
+
 
     public ArrayList<Course> unenroll(String username, ArrayList<Course> courseToDrop){
         ArrayList<Course> currentEnrollments = getEnrolledCourses(username);
