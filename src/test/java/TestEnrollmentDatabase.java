@@ -78,4 +78,34 @@ public class TestEnrollmentDatabase {
         assertEquals(3, result.size());
         assertTrue(result.contains(concession1) & result.contains(concession2) & result.contains(concession3));
     }
+
+    @Test
+    public void Should_ReturnCurrentEnrollments_WithoutUnenrolledCourses_When_UnenrollmentRequested(){
+        ArrayList<Course> desiredCourses = new ArrayList<>();
+        ArrayList<Course> coursesToDrop = new ArrayList<>();
+
+        Course course1 = Mockito.mock(Course.class);
+        Mockito.when(course1.getCourseName()).thenReturn("SOFTENG 701");
+        desiredCourses.add(course1);
+
+        Course course2 = Mockito.mock(Course.class);
+        Mockito.when(course2.getCourseName()).thenReturn("SOFTENG 754");
+        desiredCourses.add(course2);
+
+        Course course3 = Mockito.mock(Course.class);
+        Mockito.when(course3.getCourseName()).thenReturn("SOFTENG 750");
+        desiredCourses.add(course3);
+
+        coursesToDrop.add(course1);
+        coursesToDrop.add(course2);
+
+        enrollmentDatabase.addEnrollment("usr123",desiredCourses);
+
+        ArrayList<Course> returnedUnenrolledCourses = enrollmentDatabase.unenroll("usr123", coursesToDrop);
+
+        ArrayList<Course> coursesAfterUnenrollment = new ArrayList<Course>();
+        coursesAfterUnenrollment.add(course3);
+
+        assertEquals(coursesAfterUnenrollment, returnedUnenrolledCourses);
+    }
 }

@@ -25,4 +25,23 @@ public class EnrollmentDatabase {
     public ArrayList<Concession> getConcessions(String username){
         return concessionDatabase.get(username);
     }
+
+
+    public ArrayList<Course> unenroll(String username, ArrayList<Course> courseToDrop){
+        ArrayList<Course> currentEnrollments = getEnrolledCourses(username);
+        ArrayList<Course> coursesAfterUnenroll = (ArrayList<Course>) currentEnrollments.clone();
+
+        for (Course c : currentEnrollments){
+            for (Course drop : courseToDrop){
+                if (c.getCourseName().equals(drop.getCourseName())){
+                    coursesAfterUnenroll.remove(drop);
+                }
+            }
+        }
+
+        // Update the DB
+        enrolledCourseDatabase.put(username, coursesAfterUnenroll);
+
+        return coursesAfterUnenroll;
+    }
 }
