@@ -12,6 +12,9 @@ public class EnrollmentProcessor {
         queue.addLast(request);
     }
 
+    public void requestConcession(ConcessionRequest request1) {
+    }
+
     public RequestObject getNextRequest() {
         try {
             return queue.removeFirst();
