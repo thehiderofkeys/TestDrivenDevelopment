@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
@@ -40,6 +41,11 @@ public class EnrollmentProcessor {
     }
 
     public void approveConcession(Concession concession) {
+        String name = concession.getName();
+        Course course = concession.getCourse();
+        ArrayList<Course> enrollment = new ArrayList<>();
+        enrollment.add(course);
+        database.addEnrollment(name,enrollment);
     }
 
     public enum RequestResult {CONCESSION_APPLIED, ENROLLED}
