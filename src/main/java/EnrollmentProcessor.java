@@ -6,8 +6,8 @@ public class EnrollmentProcessor {
     public EnrollmentProcessor() {
         queue = new LinkedList<>();
     }
-    public void requestEnrollment(EnrollmentRequest request2) {
-        queue.addLast(request2);
+    public void requestEnrollment(EnrollmentRequest request) {
+        queue.addLast(request);
     }
 
     public EnrollmentRequest getNextRequest() {

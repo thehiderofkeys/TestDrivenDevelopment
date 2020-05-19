@@ -3,6 +3,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class TestEnrollmentProcessor {
     private EnrollmentProcessor enrollmentProcessor;
@@ -25,7 +26,7 @@ public class TestEnrollmentProcessor {
         result = enrollmentProcessor.getNextRequest();
         assertEquals(result, request2);
         result = enrollmentProcessor.getNextRequest();
-        assertEquals(result, null);
+        assertNull(result);
     }
 
 }
