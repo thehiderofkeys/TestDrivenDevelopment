@@ -34,5 +34,5 @@ public class EnrollmentProcessor {
         return null;
     }
 
-    public enum RequestResult {ENROLLED}
+    public enum RequestResult {CONCESSION_APPLIED, ENROLLED}
 }
