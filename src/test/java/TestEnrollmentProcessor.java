@@ -84,4 +84,13 @@ public class TestEnrollmentProcessor {
         courses.add(mockCourse);
         Mockito.verify(mockDB).addEnrollment("usr123",courses);
     }
+
+    @Test
+    public void Should_ReleaseSeat_When_ConcessionDeclined() {
+        Concession concession = Mockito.mock(Concession.class);
+        Mockito.when(concession.getUsername()).thenReturn("usr123");
+        Mockito.when(concession.getCourse()).thenReturn(mockCourse);
+        enrollmentProcessor.declineConcession(concession);
+        Mockito.verify(mockCourse).releaseSeat();
+    }
 }
