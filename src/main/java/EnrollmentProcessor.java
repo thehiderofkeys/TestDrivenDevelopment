@@ -54,5 +54,5 @@ public class EnrollmentProcessor {
         course.releaseSeat();
     }
 
-    public enum RequestResult {CONCESSION_APPLIED, ENROLLED}
+    public enum RequestResult {CONCESSION_APPLIED, WAITLISTED, ENROLLED}
 }
