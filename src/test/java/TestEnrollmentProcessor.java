@@ -36,6 +36,22 @@ public class TestEnrollmentProcessor {
     }
 
     @Test
+    public void Should_QueueConcessionRequests_When_ConcessionRequested(){
+        ArrayList<Concession> concessions = new ArrayList<>();
+        ConcessionRequest request1 = new ConcessionRequest("usr123",concessions);
+        ConcessionRequest request2 = new ConcessionRequest("usr123",concessions);
+        enrollmentProcessor.requestConcession(request1);
+        enrollmentProcessor.requestConcession(request2);
+        RequestObject result;
+        result = enrollmentProcessor.getNextRequest();
+        assertEquals(result, request1);
+        result = enrollmentProcessor.getNextRequest();
+        assertEquals(result, request2);
+        result = enrollmentProcessor.getNextRequest();
+        assertNull(result);
+    }
+
+    @Test
     public void Should_Enroll_When_EnrollmentRequested(){
         ArrayList<Course> courses = new ArrayList<>();
         courses.add(mockCourse);
