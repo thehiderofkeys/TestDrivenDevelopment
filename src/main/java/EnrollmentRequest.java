@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class EnrollmentRequest {
+public class EnrollmentRequest implements RequestObject{
     private String username;
     private ArrayList<Course> courses;
     public EnrollmentRequest(String username, ArrayList<Course> courses) {

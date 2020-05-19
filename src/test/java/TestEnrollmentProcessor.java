@@ -26,7 +26,7 @@ public class TestEnrollmentProcessor {
         EnrollmentRequest request2 = new EnrollmentRequest("usr123",courses);
         enrollmentProcessor.requestEnrollment(request1);
         enrollmentProcessor.requestEnrollment(request2);
-        EnrollmentRequest result;
+        RequestObject result;
         result = enrollmentProcessor.getNextRequest();
         assertEquals(result, request1);
         result = enrollmentProcessor.getNextRequest();

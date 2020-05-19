@@ -12,7 +12,7 @@ public class EnrollmentProcessor {
         queue.addLast(request);
     }
 
-    public EnrollmentRequest getNextRequest() {
+    public RequestObject getNextRequest() {
         try {
             return queue.removeFirst();
         } catch (NoSuchElementException e) {
@@ -21,9 +21,13 @@ public class EnrollmentProcessor {
     }
 
     public RequestResult processNextRequest() {
-        EnrollmentRequest request = getNextRequest();
-        database.addEnrollment(request.getUsername(),request.getCourses());
-        return RequestResult.ENROLLED;
+        RequestObject request = getNextRequest();
+        if(request instanceof EnrollmentRequest) {
+            EnrollmentRequest enrollmentRequest = (EnrollmentRequest)request;
+            database.addEnrollment(enrollmentRequest.getUsername(), enrollmentRequest.getCourses());
+            return RequestResult.ENROLLED;
+        }
+        return null;
     }
 
     public enum RequestResult {ENROLLED}
