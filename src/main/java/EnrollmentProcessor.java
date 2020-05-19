@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class EnrollmentProcessor {
-    private LinkedList<EnrollmentRequest> queue;
+    private LinkedList<RequestObject> queue;
     private EnrollmentDatabase database;
     public EnrollmentProcessor(EnrollmentDatabase database) {
         this.database = database;
@@ -12,7 +12,8 @@ public class EnrollmentProcessor {
         queue.addLast(request);
     }
 
-    public void requestConcession(ConcessionRequest request1) {
+    public void requestConcession(ConcessionRequest request) {
+        queue.addLast(request);
     }
 
     public RequestObject getNextRequest() {
