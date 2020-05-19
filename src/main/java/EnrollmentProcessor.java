@@ -3,7 +3,7 @@ import java.util.NoSuchElementException;
 
 public class EnrollmentProcessor {
     private LinkedList<EnrollmentRequest> queue;
-    public EnrollmentProcessor() {
+    public EnrollmentProcessor(EnrollmentDatabase database) {
         queue = new LinkedList<>();
     }
     public void requestEnrollment(EnrollmentRequest request) {
@@ -17,4 +17,10 @@ public class EnrollmentProcessor {
             return null;
         }
     }
+
+    public RequestResult processNextRequest() {
+        return null;
+    }
+
+    public enum RequestResult {ENROLLED}
 }

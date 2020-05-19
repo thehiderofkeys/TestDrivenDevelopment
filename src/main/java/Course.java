@@ -35,4 +35,8 @@ public class Course {
     public ArrayList<TimetableEvent> getCourseSchedule(){
         return courseSchedule;
     }
+
+    public boolean reserveSeat() {
+        return false;
+    }
 }
