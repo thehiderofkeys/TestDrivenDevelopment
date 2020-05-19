@@ -31,6 +31,11 @@ public class EnrollmentProcessor {
             database.addEnrollment(enrollmentRequest.getUsername(), enrollmentRequest.getCourses());
             return RequestResult.ENROLLED;
         }
+        if(request instanceof ConcessionRequest) {
+            ConcessionRequest enrollmentRequest = (ConcessionRequest)request;
+            database.addConcessions(enrollmentRequest.getUsername(), enrollmentRequest.getConcession());
+            return RequestResult.CONCESSION_APPLIED;
+        }
         return null;
     }
 
