@@ -43,6 +43,6 @@ public class Course {
     public void releaseSeat() {
     }
 
-    public void addToWaitList(EnrollmentRequest request) {
+    public void addToWaitList(RequestObject request) {
     }
 }
