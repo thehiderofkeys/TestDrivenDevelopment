@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class TestCourse {
 
@@ -48,5 +48,22 @@ public class TestCourse {
         Course returnedCourse = courseDatabase.get("SOFTENG 754");
 
         assertEquals(c1, returnedCourse);
+    }
+
+    @Test
+    public void Should_LimitSeats_WhenCourseIsFull(){
+        Course c1 = new Course("Name",null,null,null, 2);
+        assertTrue(c1.reserveSeat());
+        assertTrue(c1.reserveSeat());
+        assertFalse(c1.reserveSeat());
+    }
+    @Test
+    public void Should_FreeSeat_WhenSeatReleased(){
+        Course c1 = new Course("Name",null,null,null, 2);
+        assertTrue(c1.reserveSeat());
+        assertTrue(c1.reserveSeat());
+        assertFalse(c1.reserveSeat());
+        c1.releaseSeat();
+        assertTrue(c1.reserveSeat());
     }
 }
