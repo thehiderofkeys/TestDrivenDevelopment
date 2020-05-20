@@ -2,6 +2,8 @@
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 @CoverageIgnore
 public class Course {
@@ -11,12 +13,14 @@ public class Course {
     private String courseName;
     private ArrayList<TimetableEvent> courseSchedule;
     private int remainingSeats = 0;
+    private LinkedList<RequestObject> waitList;
 
     public Course (String courseName, LocalDateTime openingDate, LocalDateTime closingDate,  ArrayList<TimetableEvent> courseSchedule){
         this.openingDate = openingDate;
         this.closingDate = closingDate;
         this.courseName = courseName;
         this.courseSchedule = courseSchedule;
+        this.waitList = new LinkedList<>();
     }
 
     public Course(String courseName, LocalDateTime openingDate, LocalDateTime closingDate,  ArrayList<TimetableEvent> courseSchedule, int remainingSeats) {
@@ -55,9 +59,15 @@ public class Course {
     }
 
     public void addToWaitList(RequestObject request) {
+        waitList.addLast(request);
     }
 
     public RequestObject popWaitList() {
-        return null;
+        try {
+            return waitList.removeFirst();
+        }
+        catch (NoSuchElementException e){
+            return null;
+        }
     }
 }
