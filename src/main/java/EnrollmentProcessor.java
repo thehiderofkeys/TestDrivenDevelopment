@@ -81,7 +81,7 @@ public class EnrollmentProcessor {
     public void declineConcession(Concession concession) {
         String username = concession.getUsername();
         Course course = concession.getCourse();
-        EnrollmentRequest request = course.popWaitList();
+        EnrollmentRequest request = (EnrollmentRequest)course.popWaitList();
         if (request == null) {
             course.releaseSeat();
         }

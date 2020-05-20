@@ -46,7 +46,7 @@ public class Course {
     public void addToWaitList(RequestObject request) {
     }
 
-    public EnrollmentRequest popWaitList() {
+    public RequestObject popWaitList() {
         return null;
     }
 }
