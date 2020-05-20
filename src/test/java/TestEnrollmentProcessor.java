@@ -104,4 +104,15 @@ public class TestEnrollmentProcessor {
         assertEquals(EnrollmentProcessor.RequestResult.WAITLISTED, result);
         Mockito.verify(mockCourse).addToWaitList(request);
     }
+    @Test
+    public void Should_AddConcessionToWaitList_When_CourseIsFull(){
+        ArrayList<Concession> concessions = new ArrayList<>();
+        concessions.add(new Concession("usr123", mockCourse));
+        ConcessionRequest request = new ConcessionRequest("usr123",concessions);
+        enrollmentProcessor.requestConcession(request);
+        Mockito.when(mockCourse.reserveSeat()).thenReturn(false);
+        EnrollmentProcessor.RequestResult result = enrollmentProcessor.processNextRequest();
+        assertEquals(EnrollmentProcessor.RequestResult.WAITLISTED, result);
+        Mockito.verify(mockCourse).addToWaitList(request);
+    }
 }
