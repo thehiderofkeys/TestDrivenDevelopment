@@ -129,4 +129,17 @@ public class TestEnrollmentProcessor {
         Mockito.verify(mockCourse, Mockito.never()).releaseSeat();
         Mockito.verify(mockDB).addEnrollment("usr321",courses);
     }
+
+    @Test
+    public void Should_ProcessConcessionInWaitList_When_ConcessionDeclinedAndWaitListIsNotEmpty() {
+        Concession concession = Mockito.mock(Concession.class);
+        Mockito.when(concession.getUsername()).thenReturn("usr123");
+        Mockito.when(concession.getCourse()).thenReturn(mockCourse);
+        ArrayList<Concession> concessions = new ArrayList<>();
+        ConcessionRequest waitListedConcession = new ConcessionRequest("usr321",concessions);
+        Mockito.when(mockCourse.popWaitList()).thenReturn(waitListedConcession);
+        enrollmentProcessor.declineConcession(concession);
+        Mockito.verify(mockCourse, Mockito.never()).releaseSeat();
+        Mockito.verify(mockDB).addConcessions("usr321",concessions);
+    }
 }
