@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
@@ -65,5 +66,21 @@ public class TestCourse {
         assertFalse(c1.reserveSeat());
         c1.releaseSeat();
         assertTrue(c1.reserveSeat());
+    }
+
+    @Test
+    public void Should_QueueWaitList_WhenCourseIsFull(){
+        Course c1 = new Course("Name",null,null,null);
+        EnrollmentRequest request1 = Mockito.mock(EnrollmentRequest.class);
+        EnrollmentRequest request2 = Mockito.mock(EnrollmentRequest.class);
+        c1.addToWaitList(request1);
+        c1.addToWaitList(request2);
+        RequestObject result;
+        result = c1.popWaitList();
+        assertEquals(request1,result);
+        result = c1.popWaitList();
+        assertEquals(request2,result);
+        result = c1.popWaitList();
+        assertNull(result);
     }
 }
