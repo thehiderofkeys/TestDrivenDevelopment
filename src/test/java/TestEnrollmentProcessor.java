@@ -123,7 +123,6 @@ public class TestEnrollmentProcessor {
         Mockito.when(concession.getUsername()).thenReturn("usr123");
         Mockito.when(concession.getCourse()).thenReturn(mockCourse);
         ArrayList<Course> courses = new ArrayList<>();
-        courses.add(mockCourse);
         EnrollmentRequest waitListedEnrollment = new EnrollmentRequest("usr321",courses);
         Mockito.when(mockCourse.popWaitList()).thenReturn(waitListedEnrollment);
         enrollmentProcessor.declineConcession(concession);
