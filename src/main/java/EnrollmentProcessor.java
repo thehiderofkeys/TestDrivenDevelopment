@@ -81,12 +81,19 @@ public class EnrollmentProcessor {
     public void declineConcession(Concession concession) {
         String username = concession.getUsername();
         Course course = concession.getCourse();
-        EnrollmentRequest request = (EnrollmentRequest)course.popWaitList();
+        RequestObject request = course.popWaitList();
         if (request == null) {
             course.releaseSeat();
         }
         else {
-            database.addEnrollment(request.getUsername(),request.getCourses());
+            if(request instanceof EnrollmentRequest) {
+                EnrollmentRequest enrollmentRequest = (EnrollmentRequest)request;
+                database.addEnrollment(enrollmentRequest.getUsername(), enrollmentRequest.getCourses());
+            }
+            else {
+                ConcessionRequest concessionRequest = (ConcessionRequest)request;
+                database.addConcessions(concessionRequest.getUsername(), concessionRequest.getConcession());
+            }
         }
     }
 
