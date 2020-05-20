@@ -48,9 +48,24 @@ public class EnrollmentProcessor {
             return result;
         }
         if(request instanceof ConcessionRequest) {
-            ConcessionRequest enrollmentRequest = (ConcessionRequest)request;
-            database.addConcessions(enrollmentRequest.getUsername(), enrollmentRequest.getConcession());
-            return RequestResult.CONCESSION_APPLIED;
+            RequestResult result = RequestResult.CONCESSION_APPLIED;
+            ConcessionRequest concessionRequest = (ConcessionRequest)request;
+            ArrayList<Concession> availConcessions = new ArrayList<>();
+            for (Concession concession : concessionRequest.getConcession()){
+                if(concession.getCourse().reserveSeat()){
+                    availConcessions.add(concession);
+                }
+                else{
+                    ArrayList<Concession> concessionList = new ArrayList<>();
+                    concessionList.add(concession);
+                    ConcessionRequest waitListedRequest = new ConcessionRequest(
+                            concessionRequest.getUsername(),concessionList);
+                    concession.getCourse().addToWaitList(waitListedRequest);
+                    result = RequestResult.WAITLISTED;
+                }
+            }
+            database.addConcessions(concessionRequest.getUsername(), availConcessions);
+            return result;
         }
         return null;
     }

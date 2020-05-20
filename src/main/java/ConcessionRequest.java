@@ -16,4 +16,13 @@ public class ConcessionRequest implements RequestObject{
     public ArrayList<Concession> getConcession() {
         return concessions;
     }
+    @Override
+    public boolean equals(Object o){
+        if (o == this)
+            return true;
+        if (!(o instanceof ConcessionRequest))
+            return false;
+        ConcessionRequest cr = (ConcessionRequest)o;
+        return usernames.equals(cr.getUsername()) && concessions.equals(cr.concessions);
+    }
 }
