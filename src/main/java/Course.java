@@ -10,12 +10,18 @@ public class Course {
     private LocalDateTime closingDate;
     private String courseName;
     private ArrayList<TimetableEvent> courseSchedule;
+    private int remainingSeats = 0;
 
     public Course (String courseName, LocalDateTime openingDate, LocalDateTime closingDate,  ArrayList<TimetableEvent> courseSchedule){
         this.openingDate = openingDate;
         this.closingDate = closingDate;
         this.courseName = courseName;
         this.courseSchedule = courseSchedule;
+    }
+
+    public Course(String courseName, LocalDateTime openingDate, LocalDateTime closingDate,  ArrayList<TimetableEvent> courseSchedule, int remainingSeats) {
+        this(courseName, openingDate, closingDate, courseSchedule);
+        this.remainingSeats = remainingSeats;
     }
 
 
@@ -37,10 +43,15 @@ public class Course {
     }
 
     public boolean reserveSeat() {
+        if (remainingSeats > 0){
+            remainingSeats--;
+            return true;
+        }
         return false;
     }
 
     public void releaseSeat() {
+        remainingSeats++;
     }
 
     public void addToWaitList(RequestObject request) {
