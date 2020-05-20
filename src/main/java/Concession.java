@@ -13,7 +13,7 @@ public class Concession {
     public Course getCourse() {
         return course;
     }
-    @Override
+    @Override @CoverageIgnore
     public boolean equals(Object o){
         if (o == this)
             return true;

@@ -14,7 +14,7 @@ public class EnrollmentRequest implements RequestObject{
         return courses;
     }
 
-    @Override
+    @Override @CoverageIgnore
     public boolean equals(Object o){
         if (o == this)
             return true;

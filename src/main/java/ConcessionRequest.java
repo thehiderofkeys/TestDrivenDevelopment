@@ -16,7 +16,7 @@ public class ConcessionRequest implements RequestObject{
     public ArrayList<Concession> getConcession() {
         return concessions;
     }
-    @Override
+    @Override @CoverageIgnore
     public boolean equals(Object o){
         if (o == this)
             return true;
