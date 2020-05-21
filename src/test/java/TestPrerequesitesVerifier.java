@@ -65,7 +65,13 @@ public class TestPrerequesitesVerifier {
 
     @Test
     public void Should_Return_ListOfOneInvalidCourse_When_OneCourseSelectionMeetsPrerequisitesAndOneDoesNot() {
+        Course completedPapers[] = {course1, course2};
+        Mockito.when(enrollmentDatabase.getCompletedCourses("user123"))
+                .thenReturn(new ArrayList<Course>(Arrays.asList(completedPapers)));
 
+        ArrayList<Course> courseSelectionList = new ArrayList<>();
+
+        ArrayList<Course> rejectedCourseList = verifier.checkPrerequisites(courseSelectionList, "user123", enrollmentDatabase);
         assertTrue(rejectedCourseList.contains(course3));
         assertEquals(rejectedCourseList.size(), 1);
     }
