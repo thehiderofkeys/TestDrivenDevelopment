@@ -57,14 +57,14 @@ public class TestEnrollmentRequestVerifier {
         enrollList.add(course2);
         Course course3 = Mockito.mock(Course.class);
         enrollList.add(course3);
-        Mockito.when(edv.isEnrollmentOpen(eq(course1),Mockito.any())).thenReturn(true);
-        Mockito.when(edv.isEnrollmentOpen(not(eq(course1)),Mockito.anyObject())).thenReturn(false);
+        Mockito.when(edv.isEnrollmentOpen(eq(course1),Mockito.any())).thenReturn(false);
+        Mockito.when(edv.isEnrollmentOpen(not(eq(course1)),Mockito.anyObject())).thenReturn(true);
         ArrayList<Course> noPrereq = new ArrayList<>();
         noPrereq.add(course2);
         Mockito.when(pv.checkPrerequisites(Mockito.any(),Mockito.any(),Mockito.any())).thenReturn(noPrereq);
         ArrayList<Course> clashing = new ArrayList<>();
-        noPrereq.add(course2);
-        noPrereq.add(course2);
+        clashing.add(course2);
+        clashing.add(course3);
         Mockito.when(cv.checkClash(Mockito.any())).thenReturn(clashing);
         EnrollmentRequestVerifier.EnrollmentRejection result = requestVerifier.verify("user123",enrollList,mockDB);
         assertEquals(EnumSet.of(EnrollmentRequestVerifier.Reason.CLOSED),result.getReason(course1));
