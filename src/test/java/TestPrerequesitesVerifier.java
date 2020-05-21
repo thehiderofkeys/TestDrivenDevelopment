@@ -70,7 +70,8 @@ public class TestPrerequesitesVerifier {
                 .thenReturn(new ArrayList<Course>(Arrays.asList(completedPapers)));
 
         ArrayList<Course> courseSelectionList = new ArrayList<>();
-
+        courseSelectionList.add(course1);
+        courseSelectionList.add(course3); // user123 does not meet the prereqs for this
         ArrayList<Course> rejectedCourseList = verifier.checkPrerequisites(courseSelectionList, "user123", enrollmentDatabase);
         assertTrue(rejectedCourseList.contains(course3));
         assertEquals(rejectedCourseList.size(), 1);
