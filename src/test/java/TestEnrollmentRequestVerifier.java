@@ -3,6 +3,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.AdditionalMatchers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -34,7 +35,8 @@ public class TestEnrollmentRequestVerifier {
         Mockito.when(edv.isEnrollmentOpen(Mockito.any(),Mockito.any())).thenReturn(false);
         Mockito.when(pv.checkPrerequisites(Mockito.any(),Mockito.any(),Mockito.any())).thenReturn(enrollList);
         Mockito.when(cv.checkClash(Mockito.any())).thenReturn(enrollList);
-        EnrollmentRequestVerifier.EnrollmentRejection result = requestVerifier.verify("user123",enrollList,mockDB);
+        EnrollmentRequestVerifier.EnrollmentRejection result =
+                requestVerifier.verify("user123",enrollList,mockDB, LocalDateTime.now());
         assertEquals(enrollList,result.getCourses());
     }
     @Test
@@ -45,7 +47,8 @@ public class TestEnrollmentRequestVerifier {
         Mockito.when(edv.isEnrollmentOpen(Mockito.any(),Mockito.any())).thenReturn(true);
         Mockito.when(pv.checkPrerequisites(Mockito.any(),Mockito.any(),Mockito.any())).thenReturn(new ArrayList<>());
         Mockito.when(cv.checkClash(Mockito.any())).thenReturn(new ArrayList<>());
-        EnrollmentRequestVerifier.EnrollmentRejection result = requestVerifier.verify("user123",enrollList,mockDB);
+        EnrollmentRequestVerifier.EnrollmentRejection result =
+                requestVerifier.verify("user123",enrollList,mockDB, LocalDateTime.now());
         assertEquals(new ArrayList<>(),result.getCourses());
     }
     @Test
@@ -66,7 +69,8 @@ public class TestEnrollmentRequestVerifier {
         clashing.add(course2);
         clashing.add(course3);
         Mockito.when(cv.checkClash(Mockito.any())).thenReturn(clashing);
-        EnrollmentRequestVerifier.EnrollmentRejection result = requestVerifier.verify("user123",enrollList,mockDB);
+        EnrollmentRequestVerifier.EnrollmentRejection result =
+                requestVerifier.verify("user123",enrollList,mockDB, LocalDateTime.now());
         assertEquals(EnumSet.of(EnrollmentRequestVerifier.Reason.CLOSED),result.getReason(course1));
         assertEquals(EnumSet.of(EnrollmentRequestVerifier.Reason.PREREQ,EnrollmentRequestVerifier.Reason.CLASH),
                 result.getReason(course2));
