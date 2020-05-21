@@ -78,7 +78,7 @@ public class TestPrerequesitesVerifier {
     }
 
     @Test
-    public void Should_Return_ListOfTwoInvalidCoursesWhen_TwoCourseSelectionsDoNotMeetPrerequisetes(){
+    public void Should_Return_ListOfTwoInvalidCoursesWhen_TwoCourseSelectionsDoNotMeetPrerequisites(){
         Course completedPapers[] = {course1};
         Mockito.when(enrollmentDatabase.getCompletedCourses("user123"))
                 .thenReturn(new ArrayList<Course>(Arrays.asList(completedPapers)));

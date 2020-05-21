@@ -29,14 +29,10 @@ public class Course {
         this.remainingSeats = remainingSeats;
     }
 
+    @CoverageIgnore
     public Course(String courseName, LocalDateTime openingDate, LocalDateTime closingDate,
                   ArrayList<TimetableEvent> courseSchedule, int remainingSeats, ArrayList<String> prerequisites) {
-        this.openingDate = openingDate;
-        this.closingDate = closingDate;
-        this.courseName = courseName;
-        this.courseSchedule = courseSchedule;
-        this.waitList = new LinkedList<>();
-        this.remainingSeats = remainingSeats;
+        this(courseName, openingDate, closingDate, courseSchedule, remainingSeats);
         this.prerequisites = prerequisites;
     }
 
