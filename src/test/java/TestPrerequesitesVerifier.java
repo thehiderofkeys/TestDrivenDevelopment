@@ -76,4 +76,10 @@ public class TestPrerequesitesVerifier {
         assertTrue(rejectedCourseList.contains(course3));
         assertEquals(rejectedCourseList.size(), 1);
     }
+
+    @Test
+    public void Should_Return_ListOfTwoInvalidCoursesWhen_TwoCourseSelectionsDoNotMeetPrerequisetes(){
+        assertTrue(rejectedCourseList.contains(course2, course3));
+        assertEquals(rejectedCourseList.size, 2);
+    }
 }
