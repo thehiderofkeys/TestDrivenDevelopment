@@ -1,0 +1,10 @@
+TestLoginAuthentication.class
+TestCourse.class
+UnitTest.class
+TestEnrollmentProcessor.class
+TestCourseCatalog.class
+IntegrationTest.class
+TestClashVerifier.class
+TestTimetableViewer.class
+TestEnrollmentDatabase.class
+TestEnrollmentDateVerifier.class

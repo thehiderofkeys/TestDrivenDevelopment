@@ -1,11 +1,14 @@
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+@Category(UnitTest.class)
 public class TestEnrollmentDatabase {
     private EnrollmentDatabase enrollmentDatabase;
 
@@ -25,7 +28,7 @@ public class TestEnrollmentDatabase {
         desiredCourses.add(course3);
         enrollmentDatabase.addEnrollment("usr123",desiredCourses);
         ArrayList<Course> result = enrollmentDatabase.getEnrolledCourses("usr123");
-        assertNotEquals(null,result);
+        assertNotNull(result);
         assertEquals(3, result.size());
         assertTrue(result.contains(course1) & result.contains(course2) & result.contains(course3));
     }
@@ -42,7 +45,7 @@ public class TestEnrollmentDatabase {
         enrollmentDatabase.addEnrollment("usr123",desiredCourses1);
         enrollmentDatabase.addEnrollment("usr123",desiredCourses2);
         ArrayList<Course> result = enrollmentDatabase.getEnrolledCourses("usr123");
-        assertNotEquals(null,result);
+        assertNotNull(result);
         assertEquals(3, result.size());
         assertTrue(result.contains(course1) & result.contains(course2) & result.contains(course3));
     }
@@ -57,7 +60,7 @@ public class TestEnrollmentDatabase {
         concessions.add(concession3);
         enrollmentDatabase.addConcessions("usr123",concessions);
         ArrayList<Concession> result = enrollmentDatabase.getConcessions("usr123");
-        assertNotEquals(null,result);
+        assertNotNull(result);
         assertEquals(3, result.size());
         assertTrue(result.contains(concession1) & result.contains(concession2) & result.contains(concession3));
     }
@@ -74,7 +77,7 @@ public class TestEnrollmentDatabase {
         enrollmentDatabase.addConcessions("usr123",concessions1);
         enrollmentDatabase.addConcessions("usr123",concessions2);
         ArrayList<Concession> result = enrollmentDatabase.getConcessions("usr123");
-        assertNotEquals(null,result);
+        assertNotNull(result);
         assertEquals(3, result.size());
         assertTrue(result.contains(concession1) & result.contains(concession2) & result.contains(concession3));
     }
