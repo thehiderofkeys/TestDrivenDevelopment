@@ -33,7 +33,7 @@ public class TestPrerequesitesVerifier {
         course3 = Mockito.mock(Course.class);
 
         String prereqs1[] = {"SOFTENG701"};
-        String prereqs2[] = {"SOFTENG701", "SOFTENG702"};
+        String prereqs2[] = {"SOFTENG701", "SOFTENG702", "SOFTENG703"};
 
         Course completedPapers1[] = {course1, course2};
 
@@ -45,8 +45,6 @@ public class TestPrerequesitesVerifier {
         Mockito.when(course2.getPrerequisites()).thenReturn(new ArrayList<String>(Arrays.asList(prereqs1)));
         Mockito.when(course3.getPrerequisites()).thenReturn(new ArrayList<String>(Arrays.asList(prereqs2)));
 
-        Mockito.when(enrollmentDatabase.getCompletedCourses("user123"))
-                .thenReturn(new ArrayList<Course>(Arrays.asList(completedPapers1)));
 
         courseDatabase.put("SOFTENG 701", course1);
         courseDatabase.put("SOFTENG 702", course2);
@@ -54,10 +52,21 @@ public class TestPrerequesitesVerifier {
     }
 
     @Test
-    public void Should_Return_InvalidCourses_When_CourseSelectionGiven() {
+    public void Should_Return_EmptyList_When_CourseSelectionMeetsPrerequisites() {
+        Course completedPapers[] = {course1, course2};
+        Mockito.when(enrollmentDatabase.getCompletedCourses("user123"))
+                .thenReturn(new ArrayList<Course>(Arrays.asList(completedPapers)));
+
         ArrayList<Course> courseSelectionList = new ArrayList<>();
         courseSelectionList.add(course1);
         ArrayList<Course> rejectedCourseList = verifier.checkPrerequisites(courseSelectionList, "user123", enrollmentDatabase);
         assertTrue(rejectedCourseList.isEmpty());
+    }
+
+    @Test
+    public void Should_Return_ListOfOneInvalidCourse_When_OneCourseSelectionMeetsPrerequisitesAndOneDoesNot() {
+
+        assertTrue(rejectedCourseList.contains(course3));
+        assertEquals(rejectedCourseList.size(), 1);
     }
 }
