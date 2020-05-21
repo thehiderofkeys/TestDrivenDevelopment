@@ -4,6 +4,8 @@ import java.util.HashMap;
 public class EnrollmentDatabase {
     private HashMap<String,ArrayList<Course>> enrolledCourseDatabase = new HashMap<>();
     private HashMap<String,ArrayList<Concession>> concessionDatabase = new HashMap<>();
+    private HashMap<String,ArrayList<Course>> completedCourseDatabase = new HashMap<>();
+    private HashMap<String,ArrayList<Course>> courseRequirements = new HashMap<>();
 
     public void addEnrollment(String username, ArrayList<Course> enrollmentList){
         if (!enrolledCourseDatabase.containsKey(username)){
@@ -26,6 +28,9 @@ public class EnrollmentDatabase {
         return concessionDatabase.get(username);
     }
 
+    public ArrayList<Course> getCompletedCourses(String username) { return completedCourseDatabase.get(username); }
+
+    public ArrayList<Course> getCourseRequirements(String username) { return completedCourseDatabase.get(username); }
 
     public ArrayList<Course> unenroll(String username, ArrayList<Course> courseToDrop){
         ArrayList<Course> currentEnrollments = getEnrolledCourses(username);
