@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.sql.Time;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
+@Category(UnitTest.class)
 public class TestCourse {
 
     private HashMap<String, Course> courseDatabase;

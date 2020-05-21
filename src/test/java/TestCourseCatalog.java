@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@Category(UnitTest.class)
 public class TestCourseCatalog {
 
     private CourseCatalog database;

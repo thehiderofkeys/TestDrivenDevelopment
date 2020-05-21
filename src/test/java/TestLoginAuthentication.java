@@ -1,11 +1,13 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.HashMap;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+@Category(UnitTest.class)
 public class TestLoginAuthentication {
 
     private LoginAuthenticator loginAuthenticator;
