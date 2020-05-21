@@ -8,6 +8,8 @@ import java.util.EnumSet;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.AdditionalMatchers.not;
+import static org.mockito.Matchers.eq;
 
 public class TestEnrollmentRequestVerifier {
     private EnrollmentRequestVerifier requestVerifier;
@@ -45,5 +47,29 @@ public class TestEnrollmentRequestVerifier {
         Mockito.when(cv.checkClash(Mockito.any())).thenReturn(new ArrayList<>());
         EnrollmentRequestVerifier.EnrollmentRejection result = requestVerifier.verify("user123",enrollList,mockDB);
         assertEquals(new ArrayList<>(),result.getCourses());
+    }
+    @Test
+    public void Should_ReturnReasonForEach_When_EnrollmentDenied(){
+        ArrayList<Course> enrollList = new ArrayList<>();
+        Course course1 = Mockito.mock(Course.class);
+        enrollList.add(course1);
+        Course course2 = Mockito.mock(Course.class);
+        enrollList.add(course2);
+        Course course3 = Mockito.mock(Course.class);
+        enrollList.add(course3);
+        Mockito.when(edv.isEnrollmentOpen(eq(course1),Mockito.any())).thenReturn(true);
+        Mockito.when(edv.isEnrollmentOpen(not(eq(course1)),Mockito.anyObject())).thenReturn(false);
+        ArrayList<Course> noPrereq = new ArrayList<>();
+        noPrereq.add(course2);
+        Mockito.when(pv.checkPrerequisites(Mockito.any(),Mockito.any(),Mockito.any())).thenReturn(noPrereq);
+        ArrayList<Course> clashing = new ArrayList<>();
+        noPrereq.add(course2);
+        noPrereq.add(course2);
+        Mockito.when(cv.checkClash(Mockito.any())).thenReturn(clashing);
+        EnrollmentRequestVerifier.EnrollmentRejection result = requestVerifier.verify("user123",enrollList,mockDB);
+        assertEquals(EnumSet.of(EnrollmentRequestVerifier.Reason.CLOSED),result.getReason(course1));
+        assertEquals(EnumSet.of(EnrollmentRequestVerifier.Reason.PREREQ,EnrollmentRequestVerifier.Reason.CLASH),
+                result.getReason(course2));
+        assertEquals(EnumSet.of(EnrollmentRequestVerifier.Reason.CLASH),result.getReason(course3));
     }
 }
