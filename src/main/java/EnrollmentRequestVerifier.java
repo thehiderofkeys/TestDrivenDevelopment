@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,5 +39,10 @@ public class EnrollmentRequestVerifier {
         public ArrayList<Course> getCourses() {
             return enrollList;
         }
+
+        public EnumSet<Reason> getReason(Course course1) {
+            return null;
+        }
     }
+    public enum Reason{CLOSED,PREREQ,CLASH}
 }
