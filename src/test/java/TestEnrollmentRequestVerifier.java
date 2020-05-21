@@ -35,4 +35,15 @@ public class TestEnrollmentRequestVerifier {
         EnrollmentRequestVerifier.EnrollmentRejection result = requestVerifier.verify("user123",enrollList,mockDB);
         assertEquals(enrollList,result.getCourses());
     }
+    @Test
+    public void Should_ReturnEmptyList_When_EnrollmentSuccessful(){
+        Course mockCourse = Mockito.mock(Course.class);
+        ArrayList<Course> enrollList = new ArrayList<>();
+        enrollList.add(mockCourse);
+        Mockito.when(edv.isEnrollmentOpen(Mockito.any(),Mockito.any())).thenReturn(true);
+        Mockito.when(pv.checkPrerequisites(Mockito.any(),Mockito.any(),Mockito.any())).thenReturn(new ArrayList<>());
+        Mockito.when(cv.checkClash(Mockito.any())).thenReturn(new ArrayList<>());
+        EnrollmentRequestVerifier.EnrollmentRejection result = requestVerifier.verify("user123",enrollList,mockDB);
+        assertEquals(new ArrayList<>(),result.getCourses());
+    }
 }
