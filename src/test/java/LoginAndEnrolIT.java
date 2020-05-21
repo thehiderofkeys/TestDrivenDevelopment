@@ -10,6 +10,21 @@ import static org.junit.Assert.*;
 @Category(IntegrationTest.class)
 public class LoginAndEnrolIT {
 
+    private LoginAuthenticator loginAuthenticator;
+    private EnrollmentDatabase enrollmentDatabase;
+    private String userEnteredUserName;
+    private String userEnteredPassword;
+
+    @Before
+    public void setUp(){
+        loginAuthenticator = new LoginAuthenticator();
+        enrollmentDatabase = new EnrollmentDatabase();
+
+        userEnteredPassword = "Password123";
+        userEnteredUserName = "PabloSushibar";
+
+        loginAuthenticator.addUserCredentials("PabloSushibar", "Password123");
+    }
 
     @Test
     public void TestValidCredentialsAndEnrol(){
