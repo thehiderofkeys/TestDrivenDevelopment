@@ -15,7 +15,7 @@ public class EnrollmentRequestVerifier {
     public EnrollmentRejection verify(String username, ArrayList<Course> enrollList, EnrollmentDatabase database, LocalDateTime now) {
         ArrayList<Course> closedCourses = new ArrayList<>();
         for (Course course: enrollList){
-            if(!edv.isEnrollmentOpen(course, LocalDateTime.now())) {
+            if(!edv.isEnrollmentOpen(course, now)) {
                 closedCourses.add(course);
             }
         }
