@@ -16,11 +16,13 @@ public class TestPrerequesitesVerifier {
 
     private PrerequisitesVerifier verifier;
     private HashMap<String, Course> courseDatabase;
+    private EnrollmentDatabase enrollmentDatabase;
 
     @Before
     public void setUp() {
         verifier = new PrerequisitesVerifier();
         courseDatabase = new HashMap<>();
+        enrollmentDatabase = new EnrollmentDatabase();
 
         Course course1 = Mockito.mock(Course.class);
         Course course2 = Mockito.mock(Course.class);
@@ -42,7 +44,7 @@ public class TestPrerequesitesVerifier {
         ArrayList<Course> courseList = new ArrayList<>();
         courseList.add(courseDatabase.get("SOFTENG 701"));
         courseList.add(courseDatabase.get("SOFTENG 703"));
-        ArrayList<Course> rejectedCourseList = verifier.checkPrerequisites(courseList);
+        ArrayList<Course> rejectedCourseList = verifier.checkPrerequisites(courseList, "user123", enrollmentDatabase);
         assertTrue(rejectedCourseList.isEmpty());
     }
 }

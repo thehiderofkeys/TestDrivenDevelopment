@@ -14,6 +14,7 @@ public class Course {
     private ArrayList<TimetableEvent> courseSchedule;
     private int remainingSeats = 0;
     private LinkedList<RequestObject> waitList;
+    private ArrayList<String> prerequisites;
 
     public Course (String courseName, LocalDateTime openingDate, LocalDateTime closingDate,  ArrayList<TimetableEvent> courseSchedule){
         this.openingDate = openingDate;
@@ -26,6 +27,17 @@ public class Course {
     public Course(String courseName, LocalDateTime openingDate, LocalDateTime closingDate,  ArrayList<TimetableEvent> courseSchedule, int remainingSeats) {
         this(courseName, openingDate, closingDate, courseSchedule);
         this.remainingSeats = remainingSeats;
+    }
+
+    public Course(String courseName, LocalDateTime openingDate, LocalDateTime closingDate,
+                  ArrayList<TimetableEvent> courseSchedule, int remainingSeats, ArrayList<String> prerequisites) {
+        this.openingDate = openingDate;
+        this.closingDate = closingDate;
+        this.courseName = courseName;
+        this.courseSchedule = courseSchedule;
+        this.waitList = new LinkedList<>();
+        this.remainingSeats = remainingSeats;
+        this.prerequisites = prerequisites;
     }
 
 
@@ -45,6 +57,8 @@ public class Course {
     public ArrayList<TimetableEvent> getCourseSchedule(){
         return courseSchedule;
     }
+    @CoverageIgnore
+    public ArrayList<String> getPrerequisites() { return prerequisites; }
 
     public boolean reserveSeat() {
         if (remainingSeats > 0){
