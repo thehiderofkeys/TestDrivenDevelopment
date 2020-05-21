@@ -1,8 +1,5 @@
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class EnrollmentRequestVerifier {
     private EnrollmentDateVerifier edv;
@@ -16,7 +13,6 @@ public class EnrollmentRequestVerifier {
     }
 
     public EnrollmentRejection verify(String username, ArrayList<Course> enrollList, EnrollmentDatabase database) {
-        Set<Course> deniedList = new HashSet<>();
         ArrayList<Course> closedCourses = new ArrayList<>();
         for (Course course: enrollList){
             if(!edv.isEnrollmentOpen(course, LocalDateTime.now())) {
@@ -25,23 +21,35 @@ public class EnrollmentRequestVerifier {
         }
         ArrayList<Course> noPrereq = pv.checkPrerequisites(enrollList,username,database);
         ArrayList<Course> clashes = cv.checkClash(enrollList);
-        deniedList.addAll(closedCourses);
-        deniedList.addAll(noPrereq);
-        deniedList.addAll(clashes);
-        return new EnrollmentRejection(new ArrayList<>(deniedList));
+        return new EnrollmentRejection(closedCourses,noPrereq,clashes);
     }
 
     public class EnrollmentRejection{
-        private ArrayList<Course> enrollList;
-        private EnrollmentRejection(ArrayList<Course> enrollList){
-            this.enrollList = enrollList;
+        private HashMap<Course,EnumSet<Reason>> declined;
+        private EnrollmentRejection(ArrayList<Course> closedCourses, ArrayList<Course> noPrereq, ArrayList<Course> clashes){
+            declined = new HashMap<>();
+            for (Course course: closedCourses){
+                declined.put(course,EnumSet.of(Reason.CLOSED));
+            }
+            for (Course course: noPrereq){
+                if (!declined.containsKey(course))
+                    declined.put(course,EnumSet.of(Reason.PREREQ));
+                else
+                    declined.get(course).add(Reason.PREREQ);
+            }
+            for (Course course: clashes){
+                if (!declined.containsKey(course))
+                    declined.put(course,EnumSet.of(Reason.CLASH));
+                else
+                    declined.get(course).add(Reason.CLASH);
+            }
         }
         public ArrayList<Course> getCourses() {
-            return enrollList;
+            return new ArrayList<>(declined.keySet());
         }
 
-        public EnumSet<Reason> getReason(Course course1) {
-            return null;
+        public EnumSet<Reason> getReason(Course course) {
+            return declined.get(course);
         }
     }
     public enum Reason{CLOSED,PREREQ,CLASH}
